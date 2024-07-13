@@ -21,6 +21,9 @@ UINT CInitInstallProgressDlg::MyThreadFunction(LPVOID pParam) {
 	if (config["github_acceleration"] == true) {
 		ensureFastGithub();
 		openFastGithub();
+		// Sleep(3000);
+		//TODO: find a better method to wait fastgithub open.
+		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	}
 	myProCtrl->SetPos(20);
 	dlg->m_installTips.SetWindowTextW(L"正在安装Git");
@@ -66,6 +69,9 @@ UINT CInitInstallProgressDlg::MyThreadFunction(LPVOID pParam) {
 	bool r = launchPGPLCore();
 	if (r) {
 		((CInitInstallProgressDlg*)pParam)->CDialogEx::OnOK();
+	}
+	else {
+		dlg->m_installTips.SetWindowTextW(L"下载失败，您可以关闭并重新启动程序来尝试自动修复。如果反复出现问题，欢迎提交issue并附上pgpl_cpp.log文件");
 	}
 	return r;
 	//TODO

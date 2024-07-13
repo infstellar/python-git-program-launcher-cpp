@@ -8,9 +8,15 @@ using namespace std;
 namespace fs = filesystem;
 
 bool startProxy() {
-	string command = "explorer \"" + (WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "fastgithub.exe").string() + "\"";
+	string command = "\"" + (WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "fastgithub.exe").string() + "\"" + " start";
 	runCommand(command);
 	return true;
+}
+
+bool stopProxy() {
+    string command = "\"" + (WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "fastgithub.exe").string() + "\"" + " stop";
+    runCommand(command);
+    return true;
 }
 
 

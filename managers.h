@@ -6,6 +6,7 @@ namespace fs = filesystem;
 
 bool installAnaconda();
 bool startProxy();
+bool stopProxy();
 bool isAnacondaInstall();
 bool isPythonInstall();
 bool isGitInstall();

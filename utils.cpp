@@ -8,6 +8,7 @@
 #include <boost/algorithm/algorithm.hpp>
 #include <boost/static_string.hpp>
 #include <boost/algorithm/string.hpp>
+#include "executor.h"
 
 
 std::filesystem::path WORKING_FOLDER = std::filesystem::current_path();
@@ -45,7 +46,9 @@ int ensureDirectory(std::filesystem::path path) {
 int existThenRemove(std::filesystem::path filePath) {
     namespace fs = std::filesystem;
     if (fs::exists(filePath)) {
-        fs::remove(filePath);
+        // fs::remove(filePath);
+        std::string command = "DEL /Q /S /F \"" + filePath.string() + "\"";
+        runCommand(command);
         std::cout << "File " << filePath << " exists and has been deleted." << std::endl;
     }
     else {
@@ -58,7 +61,9 @@ int existThenRemove(std::filesystem::path filePath) {
 int existThenRemoveDirectory(std::filesystem::path filePath) {
     namespace fs = std::filesystem;
     if (fs::exists(filePath)) {
-        fs::remove_all(filePath);
+        // fs::remove_all(filePath);
+        std::string command = "RMDIR /Q /S \"" + filePath.string() + "\"";
+        runCommand(command);
         std::cout << "File " << filePath << " exists and has been deleted." << std::endl;
     }
     else {
@@ -154,7 +159,7 @@ int IsProcessRunning(const wchar_t* processName) {
 
 bool reinitFolder(std::filesystem::path filePath) {
     //TODO: BOOL
-    existThenRemove(filePath);
+    existThenRemoveDirectory(filePath);
     ensureDirectory(filePath);
     return true;
 }

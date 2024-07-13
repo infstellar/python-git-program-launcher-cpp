@@ -57,6 +57,7 @@ bool killPython() {
     string python = "toolkit\\Miniconda\\python.exe";
     string abs_python = (WORKING_FOLDER / python).string();
     KillSpecifiedProcess(abs_python);
+    return true;
 }
 
 bool launchPGPLCore() {

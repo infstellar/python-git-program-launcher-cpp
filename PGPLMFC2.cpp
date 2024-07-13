@@ -8,6 +8,7 @@
 #include "PGPLMFC2Dlg.h"
 #include <fcntl.h>
 #include "utils.h"
+#include "managers.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -44,7 +45,9 @@ void InitConsoleWindow()
 	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE);
 	int hcrt = _open_osfhandle((long)handle, _O_TEXT);
 	FILE* hf = _fdopen(hcrt, "w");
+	
 	*stdout = *hf;
+	
 
 }
 // CPGPLMFC2App 初始化
@@ -55,8 +58,9 @@ BOOL CPGPLMFC2App::InitInstance()
 	// 使用 ComCtl32.dll 版本 6 或更高版本来启用可视化方式，
 	//则需要 InitCommonControlsEx()。  否则，将无法创建窗口。
 	using namespace std;
-	ofstream fout("pgpl_cpp.log"); //文件输出流对象
+	ofstream fout("pgpl_cpp.log", ios::app); //文件输出流对象
 	streambuf* pOld = cout.rdbuf(fout.rdbuf());
+	std::cout << "test1" << std::endl;
 	INITCOMMONCONTROLSEX InitCtrls;
 	InitCtrls.dwSize = sizeof(InitCtrls);
 	// 将它设置为包括所有要在应用程序中使用的
@@ -121,6 +125,8 @@ BOOL CPGPLMFC2App::InitInstance()
 	// 由于对话框已关闭，所以将返回 FALSE 以便退出应用程序，
 	//  而不是启动应用程序的消息泵。
 	//TODO: 程序结束后是在这里结束吗？
+	//KillSpecifiedProcess((WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "FastGithub.exe").string());
+	stopProxy();
 	return FALSE;
 }
 

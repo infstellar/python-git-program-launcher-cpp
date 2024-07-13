@@ -80,9 +80,10 @@ BOOL CPGPL2_FUNC1::OnInitDialog() {
 	auto r_vcb = isVCBuildToolInstall();
 	auto r_inC = isProtectedByGreatWall();
 	minicondaCheckbox.SetCheck(BST_CHECKED);
-	minicondaCheckbox.EnableWindow(r_a);
+	//TODO: pgpl python not support yet.
+	// minicondaCheckbox.EnableWindow(r_a);
 	m_gitCheckbox.SetCheck(BST_CHECKED);
-	m_gitCheckbox.EnableWindow(r_g);
+	// m_gitCheckbox.EnableWindow(r_g);
 	m_githubAccCheckbox.SetCheck(r_inC);
 	m_vcrCheckbox.SetCheck(r_vcr == false);
 	envDlg->DestroyWindow();
