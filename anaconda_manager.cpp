@@ -29,9 +29,9 @@ bool installAnaconda() {
 
 bool useDotCondarc() {
 	string CONDARC_FILE_PATH = std::getenv("USERPROFILE");
-	CONDARC_FILE_PATH = CONDARC_FILE_PATH + "/.condarc";
+	CONDARC_FILE_PATH = CONDARC_FILE_PATH + "\\.condarc";
 	string CONDARC_MARK_PATH = std::getenv("USERPROFILE");
-	CONDARC_MARK_PATH = CONDARC_MARK_PATH + "/.condarc_flag";
+	CONDARC_MARK_PATH = CONDARC_MARK_PATH + "\\.condarc_flag";
 
 	if (!fs::exists(CONDARC_FILE_PATH)) {
 		bool CONDARC_NOT_FOUND_flag = true;
@@ -53,9 +53,9 @@ bool useDotCondarc() {
 bool removeDotCondarc() {
 	//TODO: BOOL
 	string CONDARC_FILE_PATH = std::getenv("USERPROFILE");
-	CONDARC_FILE_PATH = CONDARC_FILE_PATH + "/.condarc";
+	CONDARC_FILE_PATH = CONDARC_FILE_PATH + "\\.condarc";
 	string CONDARC_MARK_PATH = std::getenv("USERPROFILE");
-	CONDARC_MARK_PATH = CONDARC_MARK_PATH + "/.condarc_flag";
+	CONDARC_MARK_PATH = CONDARC_MARK_PATH + "\\.condarc_flag";
 	if (fs::exists(CONDARC_MARK_PATH)) {
 		existThenRemove(CONDARC_FILE_PATH);
 		existThenRemove(CONDARC_MARK_PATH);
