@@ -1,6 +1,7 @@
 #include "managers.h"
 #include <tchar.h>
 #include <comdef.h>
+#include "downloader.h"
 
 bool installPGPLCore() {
     auto del_f = WORKING_FOLDER / "python-git-program-launcher";
@@ -15,11 +16,23 @@ bool installPGPLCore() {
     string git = getGitPath();
     // string command1 = git + " config --local --unset http.proxy";
     // string command2 = git + " config --local --unset https.proxy";
-    string command3 = git + " clone " + "https://github.com/infstellar/python-git-program-launcher";
+    auto sp1 = TestSpeed("https://github.com");
+    auto sp2 = TestSpeed("https://gitee.com");
+    string url = "";
+    if (sp1 < sp2) {
+        url = "https://github.com/infstellar/python-git-program-launcher";
+    }
+    else {
+        url = "https://gitee.com/infstellar/python-git-program-launcher";
+    }
+
+    
+    string command3 = git + " clone " + url;
     string command4 = git + " checkout " + "cpp_launcher";
     string command31 = git + " fetch";
     string command32 = git + " pull -f";
-    runCommand(command1); runCommand(command2); runCommand(command3); 
+    //runCommand(command1); runCommand(command2); 
+    runCommand(command3); 
     _chdir("./python-git-program-launcher");
     runCommand(command31); runCommand(command32); runCommand(command4);
     _chdir("../");
