@@ -13,8 +13,8 @@ bool installPGPLCore() {
     }
     // existThenRemoveDirectory(WORKING_FOLDER / "python-git-program-launcher");
     string git = getGitPath();
-    string command1 = git + " config --local http.proxy false";
-    string command2 = git + " config --local https.proxy false";
+    // string command1 = git + " config --local --unset http.proxy";
+    // string command2 = git + " config --local --unset https.proxy";
     string command3 = git + " clone " + "https://github.com/infstellar/python-git-program-launcher";
     string command4 = git + " checkout " + "cpp_launcher";
     string command31 = git + " fetch";

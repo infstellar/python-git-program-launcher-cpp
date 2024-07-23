@@ -73,6 +73,7 @@ UINT CInitInstallProgressDlg::MyThreadFunction(LPVOID pParam) {
 	else {
 		dlg->m_installTips.SetWindowTextW(L"下载失败，您可以关闭并重新启动程序来尝试自动修复。如果反复出现问题，欢迎提交issue并附上pgpl_cpp.log文件");
 	}
+	stopProxy();
 	return r;
 	//TODO
 	

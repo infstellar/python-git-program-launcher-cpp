@@ -126,7 +126,7 @@ BOOL CPGPLMFC2App::InitInstance()
 	//  而不是启动应用程序的消息泵。
 	//TODO: 程序结束后是在这里结束吗？
 	//KillSpecifiedProcess((WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "FastGithub.exe").string());
-	stopProxy();
+	// stopProxy();
 	return FALSE;
 }
 

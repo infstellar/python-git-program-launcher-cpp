@@ -197,7 +197,7 @@ bool ensure7zip() {
 using namespace std;
 namespace fs = filesystem;
 bool ensureFastGithub() {
-    fs::path filePath = WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "Fastgithub.exe";
+    fs::path filePath = WORKING_FOLDER / "toolkit" / "fastgithub_win-x64" / "fastgithub.exe";
     if (not fs::exists(filePath)) {
         ensureDirectory(filePath.parent_path());
         string url = "https://gitee.com/XingYuan55/FastGithub/releases/download/2.1.4/fastgithub_win-x64.zip";
