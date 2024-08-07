@@ -12,18 +12,21 @@
 UINT CInitInstallProgressDlg::MyThreadFunction(LPVOID pParam) {
 	// CProgressCtrl* myProCtrl = (CProgressCtrl*)pParam;
 	CProgressCtrl* myProCtrl = ((CInitInstallProgressDlg*)pParam)->myProCtrl;
+	CInitInstallProgressDlg* dlg = (CInitInstallProgressDlg*)pParam;
 	// 线程的实际工作在这里
 	Json::Value config = readJsonFile(WORKING_FOLDER / "init_install_checkbox.json");
 	// cout << "3 " << (config["git"] == false) << endl;
+	// dlg->m_installTips.SetWindowTextW(L"正在检查网络");
+	// auto tsinghua_connect = TestSpeed("https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/");
 	myProCtrl->SetPos(10);
-	CInitInstallProgressDlg* dlg = (CInitInstallProgressDlg*)pParam;
+	
 	dlg->m_installTips.SetWindowTextW(L"正在安装Github加速器");
 	if (config["github_acceleration"] == true) {
 		ensureFastGithub();
 		openFastGithub();
 		// Sleep(3000);
 		//TODO: find a better method to wait fastgithub open.
-		std::this_thread::sleep_for(std::chrono::milliseconds(5000));
+		//std::this_thread::sleep_for(std::chrono::milliseconds(5000));
 	}
 	myProCtrl->SetPos(20);
 	dlg->m_installTips.SetWindowTextW(L"正在安装Git");

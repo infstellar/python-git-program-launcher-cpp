@@ -22,20 +22,23 @@ const int retryTimes = 4;
 double TestSpeed(std::string domain) {
     using namespace cpr;
     double delay = 0;
-
+       
+    std::cout << "Testing: " << domain;
     for (int i = 0; i <= retryTimes-1; i++) {
         std::chrono::time_point<std::chrono::system_clock> start, end;
         start = std::chrono::system_clock::now();
-        auto responses = Get(Url{ domain }, Timeout{1500});
+        auto responses = Get(Url{ domain }, Timeout{3000});
         end = std::chrono::system_clock::now();
         std::chrono::duration<double> elapsed_seconds = end - start;
         double timeCost = elapsed_seconds.count();
         if (responses.status_code != 200 and responses.status_code != 206) {
             timeCost = 4;
         }
+        
         std::cout << i << ": " << timeCost << " | " << responses.status_code << std::endl;
         delay = delay + timeCost;
     }
+    std::cout << "Result: " << (delay / retryTimes);
     return delay / retryTimes;
 }
 
@@ -81,6 +84,23 @@ std::string SelectFastestURL(std::string originUrl, std::array<std::string, 2> o
     
     int min_num = min_element(delays, delays+3) - delays;
     string rUrl = mirrorUrl[min_num] + "/" + suffix;
+    cout << "Fastest url: " << rUrl;
+    return rUrl;
+
+}
+
+std::string SelectFastestURLV2(std::array<std::string, 3> DomainUrl, std::array<std::string, 3> DownloadUrl) {
+    using namespace std;
+    double delays[3];
+    double min_cost = 99;
+
+    for (int i = 0; i <= 2; i++) {
+        delays[i] = TestSpeed(DomainUrl[i]);
+        cout << delays[i] << endl;
+    }
+
+    int min_num = min_element(delays, delays + 3) - delays;
+    string rUrl = DownloadUrl[min_num];
     cout << "Fastest url: " << rUrl;
     return rUrl;
 
@@ -147,8 +167,17 @@ bool downloadFiles(std::string fileURL, std::string fileName) {
 
 bool downloadAnaconda() {
     using namespace std;
-    string url = "https://repo.anaconda.com/miniconda/Miniconda3-py310_24.4.0-0-Windows-x86_64.exe";
-    url = SelectFastestURL(url, { "https://mirrors.tuna.tsinghua.edu.cn/anaconda", "https://mirrors.tuna.tsinghua.edu.cn/anaconda" }, {"mirrors.tuna.tsinghua.edu.cn","mirrors.tuna.tsinghua.edu.cn"});
+    // string url = "https://repo.anaconda.com/miniconda/Miniconda3-py310_24.4.0-0-Windows-x86_64.exe";
+    // url = SelectFastestURL(url, { "https://mirrors.tuna.tsinghua.edu.cn/anaconda", "https://mirrors.tuna.tsinghua.edu.cn/anaconda" }, {"mirrors.tuna.tsinghua.edu.cn","mirrors.tuna.tsinghua.edu.cn"});
+    string url = SelectFastestURLV2(
+        { 
+            "repo.anaconda.com", 
+            "mirrors.tuna.tsinghua.edu.cn", 
+            "mirrors.tuna.tsinghua.edu.cn" },
+        { 
+            "https://repo.anaconda.com/miniconda/Miniconda3-py310_24.4.0-0-Windows-x86_64.exe", 
+            "https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_24.4.0-0-Windows-x86_64.exe", 
+            "https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/Miniconda3-py310_24.4.0-0-Windows-x86_64.exe" });
     auto r = downloadFiles(url, "miniconda.exe");
     return r;
 }
@@ -157,7 +186,15 @@ bool downloadAnaconda() {
 
 bool downloadGit() {
     using namespace std;
-    string url = "https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/PortableGit-2.45.2-64-bit.7z.exe";
+    string url = SelectFastestURLV2(
+        {
+            "github.com",
+            "registry.npmmirror.com",
+            "registry.npmmirror.com" },
+        {
+            "https://github.com/git-for-windows/git/releases/download/v2.45.2.windows.1/PortableGit-2.45.2-64-bit.7z.exe",
+            "https://registry.npmmirror.com/-/binary/git-for-windows/v2.45.2.windows.1/PortableGit-2.45.2-64-bit.7z.exe",
+            "https://registry.npmmirror.com/-/binary/git-for-windows/v2.45.2.windows.1/PortableGit-2.45.2-64-bit.7z.exe" });
     auto r = downloadFiles(url, "PortableGit.7z.exe");
     return r;
 }

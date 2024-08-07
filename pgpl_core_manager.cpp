@@ -53,16 +53,18 @@ string getPython() {
 }
 
 bool installPythonPackages() {
-    if (isProtectedByGreatWall()) {
+    /*if (isProtectedByGreatWall()) {
         useDotCondarc();
-    }
+    }*/
     
     auto python = getPython();
     auto req = WORKING_FOLDER / "python-git-program-launcher" / "requirements.txt";
     // runCommand("explorer \"" + req.string() + "\"");
     // getCmdResult(python + " -m pip install -r \"" + req.string() + "\"");
-    runCommand((python + " -m pip install -r \"" + req.string() + "\"").c_str());
-    removeDotCondarc();
+    string mirrorUrl = SelectFastestURLV2({ "pypi.org", "pypi.tuna.tsinghua.edu.cn","mirrors.aliyun.com" }, 
+        { "https://pypi.org/simple", "https://pypi.tuna.tsinghua.edu.cn/simple", "https://mirrors.aliyun.com/pypi/simple" });
+    runCommand((python + " -m pip install -r \"" + req.string() + "\" -i " + mirrorUrl).c_str());
+    /*removeDotCondarc();*/
     return true;
 }
 
