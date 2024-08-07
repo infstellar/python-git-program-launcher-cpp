@@ -79,8 +79,11 @@ bool launchPGPLCore() {
     //TODO Better cmd
     // auto python = getPython();
     string python = "toolkit\\Miniconda\\python.exe";
+    string python_floder = "toolkit\\Miniconda";
     string abs_python = (WORKING_FOLDER / python).string();
+    string abs_python_floder = (WORKING_FOLDER / python_floder).string();
     wstring dsf = L"123";
+    cout << "PGPLC v0.5.0" << endl;
     auto ewr = dsf.c_str();
     auto pgpl = WORKING_FOLDER/"python-git-program-launcher" / "gui.py";
     // std::string str = "toolkit\\Miniconda\\python.exe python-git-program-launcher\\gui.py";
@@ -90,6 +93,39 @@ bool launchPGPLCore() {
     // return (runCommand("start /min /wait \"\" " +python + " \"" + pgpl.string() + "\" ") == 0);
     // return (runCommandHidden(lp) == 0);
     killPython();
+    char* libvar;
+    size_t requiredSize;
+
+    getenv_s(&requiredSize, NULL, 0, "PATH");
+    if (requiredSize == 0)
+    {
+        printf("PATH doesn't exist!\n");
+    }
+
+    libvar = (char*)malloc(requiredSize * sizeof(char));
+    if (!libvar)
+    {
+        printf("Failed to allocate memory!\n");
+    }
+    getenv_s(&requiredSize, libvar, requiredSize, "PATH");
+    cout << "Original PATH variable is: "<< libvar<<endl;
+    string pathvar = string(libvar);
+    string full_env = abs_python_floder + ";" + pathvar;
+    _putenv_s("PATH", full_env.data());
+
+    getenv_s(&requiredSize, NULL, 0, "PATH");
+
+    libvar = (char*)realloc(libvar, requiredSize * sizeof(char));
+    if (!libvar)
+    {
+        printf("Failed to allocate memory!\n");
+        exit(1);
+    }
+
+    // Get the new value of the LIB environment variable.
+    getenv_s(&requiredSize, libvar, requiredSize, "PATH");
+    cout<<"New PATH variable is: "<< libvar<<endl;
+
     string r = ExeCmd(python + " \"" + pgpl.string() + "\" ");
     auto r2 = r.find("this output is used by CPP launcher to check if the python-version PGPL is successfully opened.");
     //结束后终止python进程
