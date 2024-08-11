@@ -13,6 +13,7 @@
 #include "CloseProxyDlg.h"+
 #include "InstallTipsDlg.h"
 #include "EnvCheckTipsDlg.h"
+#include "CheckAsciiDlg.h"
 
 
 // CPGPL2_FUNC1 对话框
@@ -120,12 +121,18 @@ void CPGPL2_FUNC1::EndDialog() {
 	CInitInstallProgressDlg dlg;
 	CCloseProxyDlg dlg2;
 	CInstallTipsDlg dlg3;
+	CCheckAsciiDlg dlg4;
 	// m_pFunc1Dlg->Create(IDD_SELECT_FUNCTION_1, this);
 	// 显示非模态对话框   
 
 	// m_pFunc1Dlg.ShowWindow(SW_SHOW);
 	//下载之前的检查
 	dlg2.DoModal();
+	INT_PTR nResponse1 = dlg4.DoModal();
+	if (nResponse1 == IDOK) {
+		CPGPL2_FUNC1::OnOK();
+		return;
+	}
 	INT_PTR nResponse = dlg3.DoModal();
 	if (nResponse == IDCANCEL) {
 		CPGPL2_FUNC1::OnOK();

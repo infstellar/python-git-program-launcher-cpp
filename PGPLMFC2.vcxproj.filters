@@ -66,6 +66,9 @@
     <ClInclude Include="EnvCheckTipsDlg.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="CheckAsciiDlg.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="PGPLMFC2.cpp">
@@ -117,6 +120,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="EnvCheckTipsDlg.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="CheckAsciiDlg.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

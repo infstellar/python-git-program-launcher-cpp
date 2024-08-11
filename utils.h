@@ -24,6 +24,7 @@ bool isProtectedByGreatWall();
 LPCWSTR stringToLPCWSTR(std::string orig);
 bool KillSpecifiedProcess(const std::string& p_strPath);
 bool killPython();
+bool isAscii(const std::string& path);
 
 
 

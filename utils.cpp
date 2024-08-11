@@ -9,9 +9,18 @@
 #include <boost/static_string.hpp>
 #include <boost/algorithm/string.hpp>
 #include "executor.h"
-
+#include <string>
+#include <algorithm>
 
 std::filesystem::path WORKING_FOLDER = std::filesystem::current_path();
+
+bool isAscii(const std::string& s)
+{
+    return !std::any_of(s.begin(), s.end(), [](char c) {
+        return static_cast<unsigned char>(c) > 127;
+        });
+}
+
 
 int ensureDirectory(std::string path) {
     int len = path.length();

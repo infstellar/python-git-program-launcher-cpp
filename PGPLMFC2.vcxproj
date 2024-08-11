@@ -200,6 +200,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="anaconda_manager.h" />
+    <ClInclude Include="CheckAsciiDlg.h" />
     <ClInclude Include="CloseProxyDlg.h" />
     <ClInclude Include="CPGPL2_FUNC1.h" />
     <ClInclude Include="downloader.h" />
@@ -222,6 +223,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="CheckAsciiDlg.cpp" />
     <ClCompile Include="CloseProxyDlg.cpp" />
     <ClCompile Include="CPGPL2_FUNC1.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>

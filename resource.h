@@ -19,12 +19,14 @@
 #define IDD_CLOSE_PROXY_DIALOG1         111
 #define IDD_INSTALL_TIPS_DIALOG         112
 #define IDD_ENV_CHECK_DIALOG            113
+#define IDD_CCheckAsciiDlg              114
 #define IDR_MAINFRAME                   128
 #define IDD_DIALOG2                     129
 #define IDD_TIPS_DIALOG                 129
 #define IDD_CLOSE_PROXY_DIALOG          130
 #define IDD_DIALOG3                     131
 #define IDD_SELECT_FUNCTION_1           132
+#define IDD_ASCII_CHECK_DIALOG          133
 #define IDD_DIALOG1                     134
 #define IDD_INIT_INSTALL_PROGRESS       134
 #define IDC_CHECK4                      1000
@@ -45,9 +47,9 @@
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
 #define _APS_NO_MFC                     1
-#define _APS_NEXT_RESOURCE_VALUE        132
+#define _APS_NEXT_RESOURCE_VALUE        134
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1006
-#define _APS_NEXT_SYMED_VALUE           114
+#define _APS_NEXT_SYMED_VALUE           115
 #endif
 #endif
